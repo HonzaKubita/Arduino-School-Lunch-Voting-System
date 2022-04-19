@@ -138,12 +138,20 @@ int hlasovani() {
 }
 
 String buttons() {
-  while(analogRead(button1Pin) < 100 && analogRead(button2Pin) < 100) {}
-  if(analogRead(button1Pin) > 100) {
+  Serial.print("Vyber...");
+  while (analogRead(button1Pin) < 100 && analogRead(button2Pin) < 100) {}
+  if (analogRead(button1Pin) > 300) {
+    Serial.println("ANO");
+    Serial.println(analogRead(button1Pin));
     return "ANO";
-  } else {
+  } else if (analogRead(button2Pin) > 300) {
+    Serial.println("NE");
+    Serial.println(analogRead(button2Pin));
     return "NE";
-  }  
+  } else {
+    Serial.println("ERROR unreadable");
+    return "ANO";
+  }
 }
 
 boolean getID() {
